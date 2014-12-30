@@ -1,0 +1,17 @@
+---
+- hosts: localhost
+
+  vars:
+    es:
+      version: 1.4
+
+  tasks:
+    - name: elasticsearch | add repository key
+      apt_key: url=http://packages.elasticsearch.org/GPG-KEY-elasticsearch
+
+    - name: elasticsearch | add repository
+      apt_repository: repo='deb http://packages.elasticsearch.org/elasticsearch/{{ es.version }}/debian stable main' update_cache=yes
+      tags: elasticsearch
+
+    - name: elasticsearch | install
+      apt: pkg=elasticsearch state=latest update_cache=yes
