@@ -1,0 +1,10 @@
+---
+- hosts: localhost
+
+  tasks:
+    - name: install haproxy and socat
+      apt: name={{ item }} state=present
+      with_items:
+        - haproxy
+        - socat
+        - curl
